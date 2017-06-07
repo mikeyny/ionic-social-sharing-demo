@@ -1,14 +1,50 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Social Sharing
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="bubbles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- Cards containing quotes -->
+  <ion-card *ngFor="let quote of quotes; let i = index;">
+    <!-- Quote aurthor -->
+    <ion-card-header>
+      {{quote.title}}
+    </ion-card-header>
+    <!-- Quote Title -->
+    <ion-card-content [innerHtml]=quote.content></ion-card-content>
+
+    <!-- Sharing Icons -->
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-only (click)="regularShare(i)" color="primary" clear>
+        <ion-icon class="share-icon" name="share"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="whatsappShare(i)" color="primary" clear>
+        <ion-icon class="share-icon" name="logo-whatsapp"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="facebookShare(i)" color="primary" clear>
+        <ion-icon  class="share-icon" name="logo-facebook"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="twitterShare(i)" color="primary" clear>
+        <ion-icon class="share-icon" name="logo-twitter"></ion-icon>
+      </button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>
